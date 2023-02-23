@@ -11,4 +11,4 @@ COPY . /nezuko
 
 RUN yarn
 
-CMD ["yarn", "start"]
+CMD ["node", "."]
