@@ -1,14 +1,13 @@
-FROM fedora:37
+FROM fusuf/whatsasena:latest
 
-RUN sudo dnf -y update &&\
-    sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm &&\
-    sudo dnf install -y git ffmpeg ImageMagick nodejs libwebp yarnpkg &&\
-    sudo dnf clean all -y
+RUN git clone https://github.com/zim-bot/zimbot-v4  /Drips/Zimbotv4
 
-WORKDIR /nezuko
+WORKDIR /Drips/Zimbotv4
 
-COPY . /nezuko
+ENV TZ=Africa/Harare
 
-RUN yarn
+RUN npm install
 
-CMD ["node", "."]
+RUN npm install supervisor -g
+RUN yarn install --ignore-engines
+CMD ["node", "index.js"]
